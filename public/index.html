@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>One-Pager Contact</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main>
+    <h1>Say Hi</h1>
+
+    <form id="contact">
+      <input  name="name"  placeholder="Your name"   required />
+      <input  name="email" type="email" placeholder="Your email" required />
+      <textarea name="message" placeholder="Message" rows="6" required></textarea>
+      <button type="submit">Send</button>
+      <p id="status"></p>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('contact').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const data = Object.fromEntries(new FormData(form).entries());
+      const res  = await fetch('/api/contact', {    // route = functions/contact.js
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      document.getElementById('status').textContent =
+        res.ok ? '✓ Sent – thanks!' : '⚠️ Error, try again.';
+      form.reset();
+    });
+  </script>
+</body>
+</html>

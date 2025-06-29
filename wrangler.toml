@@ -1,0 +1,12 @@
+name = "my-site"
+pages_build_output_dir = "public"  # static files directory
+
+# Email routing binding – must match “SEND_IT” used above
+[[send_email]]
+name                 = "SEND_IT"
+destination_address  = "you@example.com"   # where you receive messages
+# (omit destination_address to allow multiple verified recipients)
+
+[vars]               # page-level environment variables
+CONTACT_SENDER       = "noreply@yourdomain.com"
+CONTACT_RECIPIENT    = "you@example.com"
